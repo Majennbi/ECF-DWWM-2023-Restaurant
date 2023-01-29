@@ -42,7 +42,9 @@ class AppFixtures extends Fixture
             $dish->setTitle($this->faker->word());
             $dish->setPrice(mt_rand(1, 50));
             $dish->setDescription($this->faker->paragraph(2));
-            $dish->setImage($this->faker->imageUrl(640, 480, 'animals', true));
+            /* * The image functionality is not yet implemented
+            $dish->setImage($this->faker->imageUrl(250, 250));*/
+
 
             $manager->persist($dish);
             

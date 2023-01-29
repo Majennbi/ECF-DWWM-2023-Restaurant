@@ -5,9 +5,11 @@ namespace App\Entity;
 use App\Repository\DishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DishRepository::class)]
+#[UniqueEntity('title', message: 'Ce plat existe déjà')]
 class Dish
 {
     #[ORM\Id]
@@ -33,8 +35,9 @@ class Dish
     #[Assert\NotNull()]
     private ?float $price = null;
 
+    /* * The image functionality is not yet implemented
     #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $image = null;
+    private $image = null;*/
 
     public function getId(): ?int
     {
@@ -89,6 +92,7 @@ class Dish
         return $this;
     }
 
+    /* The image functionality is not yet implemented
     public function getImage()
     {
         return $this->image;
@@ -99,5 +103,5 @@ class Dish
         $this->image = $image;
 
         return $this;
-    }
+    }*/
 }
