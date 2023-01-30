@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carte du restaurant
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4" style="max-width: 80%">
+    {% if not dishes is same as([]) %}
+        <h1>Carte du restaurant</h1>
+            <p>Voici la carte du restaurant</p>
+
+    <a href="{{ path('dish.new') }}" class="btn btn-primary mb-4">Ajouter un plat</a>
+
+             {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+<div class="accordion d-flex flex-column" id="accordionExample"
+style="witdh: 100%">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed dropdown-toggle btn btn-primary btn-lg" type="button" 
+      data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+      style="font-size: 1.5rem; width: 100%; height: 60px; padding: 10px">
+        Les entrées
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+      <div class="accordion-body">
+        {% for dish in dishes %}
+                <div>
+                    <h2>{{ dish.category }}</h2>
+                    <p>{{ dish.title }}</p>
+                    <p>{{ dish.description }}</p>
+                    <p>{{ dish.price }} €</p>
+                    <!-- the image functionality is not implemented yet-->
+                    <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
+                </div> 
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed dropdown-toggle btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+        style="font-size: 1.5rem; width: 100%; height: 60px; padding: 10px">
+        Les plats
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+      <div class="accordion-body">
+        {% for dish in dishes %}
+                <div>
+                    <h2>{{ dish.category }}</h2>
+                    <p>{{ dish.title }}</p>
+                    <p>{{ dish.description }}</p>
+                    <p>{{ dish.price }} €</p>
+                    <!-- the image functionality is not implemented yet-->
+                    <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed dropdown-toggle btn btn-primary btn-lg" type="button" 
+      data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+      style="font-size: 1.5rem; width: 100%; height: 60px; padding: 10px">
+        Les desserts
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+       {% for dish in dishes %}
+                <div>
+                    <h2>{{ dish.category }}</h2>
+                    <p>{{ dish.title }}</p>
+                    <p>{{ dish.description }}</p>
+                    <p>{{ dish.price }} €</p>
+                    <!-- the image functionality is not implemented yet-->
+                    <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
+                </div>                
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingFour">
+      <button class="accordion-button collapsed dropdown-toggle btn btn-primary btn-lg" type="button" 
+      data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+      style="font-size: 1.5rem; width: 100%; height: 60px; padding: 10px">
+        Les boissons
+      </button>
+    </h2>
+    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample" style="">
+      <div class="accordion-body">
+        {% for dish in dishes %}
+                <div>
+                    <h2>{{ dish.category }}</h2>
+                    <p>{{ dish.title }}</p>
+                    <p>{{ dish.description }}</p>
+                    <p>{{ dish.price }} €</p>
+                     <!-- the image functionality is not implemented yet-->
+                     <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
+                </div> 
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% else %}
+        <h1>Il n'y a pas encore de plats dans la carte</h1>
+    {% endif %}
+</div>
+
+{% endblock %}
