@@ -5,9 +5,12 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\Deal;
 use App\Entity\Dish;
+use App\Entity\User;
 use Faker\Generator;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\UserListener;
 
 class AppFixtures extends Fixture
 {
@@ -15,6 +18,7 @@ class AppFixtures extends Fixture
          * @var Generator
          */
         private Generator $faker;
+
 
         public function __construct()
         {
@@ -36,7 +40,7 @@ class AppFixtures extends Fixture
         }
 
         //Dish
-        for ($j=1; $i<=100; $i++) {
+        for ($j=1; $j<=100; $j++) {
             $dish = new Dish ();
             $dish->setCategory($this->faker->word());
             $dish->setTitle($this->faker->word());
@@ -48,6 +52,19 @@ class AppFixtures extends Fixture
 
             $manager->persist($dish);
             
+        }
+
+        //Users
+        for ($k=1; $k<=10; $k++) {
+            $user = new User();
+            $user->setFullName($this->faker->name());
+            $user->setEmail($this->faker->email());
+            $user->setPassword($this->faker->password());
+            $user->setRoles(['ROLE_USER']);
+            $user->setPlainPassword('password');
+            
+
+            $manager->persist($user);
         }
      
         $manager->flush();
