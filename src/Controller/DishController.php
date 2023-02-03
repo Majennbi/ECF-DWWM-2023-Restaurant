@@ -109,7 +109,7 @@ class DishController extends AbstractController
      * 
      * @param EntityManagerInterface $manager
      * @param Dish $dish
-     * @return Response
+     * @return Response 
      */
 
     #[Route('/dish/delete/{id}', 'dish.delete', methods: ['GET'])]

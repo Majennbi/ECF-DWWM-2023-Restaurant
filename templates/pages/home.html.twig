@@ -6,6 +6,13 @@
 <div class="jumbotron">
   <h1 class="display-4">Le site du restaurant Le quai antique est en cours de construction.
   Encore un peu de patience </h1>
+
+  {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+
   <p class="lead">Le quai antique va bientôt ouvrir ses portes, restés connectés</p>
   <hr class="my-4">
   <p>L'application va être crééer de A à Z par Benjamin MICHEL, en formation de dev</p>

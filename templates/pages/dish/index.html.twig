@@ -11,10 +11,10 @@
 
     <a href="{{ path('dish.new') }}" class="btn btn-primary mb-4">Ajouter un plat</a>
 
-             {% for message in app.flashes('success') %}
-    <div class="alert alert-success mt-4">
-        {{ message }}
-    </div>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
     {% endfor %}
 
 <div class="accordion d-flex flex-column" id="accordionExample"
