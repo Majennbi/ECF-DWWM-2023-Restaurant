@@ -7,10 +7,11 @@ use App\Entity\Deal;
 use App\Entity\Dish;
 use App\Entity\User;
 use Faker\Generator;
+use App\UserListener;
+use App\Entity\Booking;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\UserListener;
 
 class AppFixtures extends Fixture
 {
@@ -68,5 +69,20 @@ class AppFixtures extends Fixture
         }
      
         $manager->flush();
+
+        //Booking
+        for ($l=1; $l<=5; $l++) {
+            $booking = new Booking();
+            $booking->setGuestsNumber(mt_rand(1, 6));
+            $booking->setBookingHour(new \DateTimeImmutable('now'));
+            
+           
+
+
+            $manager->persist($booking); 
+        }
+     
+        $manager->flush();
     }
+    
 }

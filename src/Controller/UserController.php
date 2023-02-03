@@ -58,10 +58,28 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * This controller show a form to edit a user password
+     * 
+     * @param User $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordHasherInterface $hasher
+     * @return Response
+     */
     #[Route('/user/password-edit/{id}', name: 'user.edit.password', methods: ['GET', 'POST'])]
     public function editPassword(User $user, Request $request, EntityManagerInterface $manager,
     UserPasswordHasherInterface $hasher): Response 
     {
+
+        if (!$this->getUser()) { 
+            return $this->redirectToRoute('security.login');
+        }
+        
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute('home.index');
+        }
 
         $form = $this->createForm(UserPasswordType::class);
 
@@ -69,16 +87,19 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
 
-                $user->setPassword($hasher->hashPassword($user, $form->getData()['newPassword']) );
+                $user->setUpdatedAt(new \DateTimeImmutable());
+                $user->setPlainPassword($form->getData()['newPassword']);
+ 
+                $this->addFlash('success', 'Le mot de passe a bien été modifié !');
 
                 $manager->persist($user);
                 $manager->flush();
      
-                 $this->addFlash('success', 'Le mot de passe a bien été modifié !');
+                 
      
                  return $this->redirectToRoute('home.index');
              } else {
-                 $this->addFlash('warning', 'Le mot de passe est incorrect !');
+                 $this->addFlash('warning', 'Le mot de passe est incorrect !'); 
              }
             }
         return $this->render('pages/user/edit_password.html.twig',[
