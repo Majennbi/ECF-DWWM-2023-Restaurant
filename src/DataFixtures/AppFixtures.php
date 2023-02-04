@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
         //Dish
         for ($j=1; $j<=100; $j++) {
             $dish = new Dish ();
-            $dish->setCategory($this->faker->word());
+            $dish->setCategory('entrée');
             $dish->setTitle($this->faker->word());
             $dish->setPrice(mt_rand(1, 50));
             $dish->setDescription($this->faker->paragraph(2));
@@ -56,6 +56,18 @@ class AppFixtures extends Fixture
         }
 
         //Users
+
+        $users = [];
+
+        $admin = new User();
+        $admin->setFullName('Administrateur de l\'application');
+        $admin->setEmail('admin@lequaiantique.fr');
+        $admin->setPlainPassword('password');
+        $admin->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+
+        $users [] = $admin;
+        $manager->persist($admin);
+
         for ($k=1; $k<=10; $k++) {
             $user = new User();
             $user->setFullName($this->faker->name());
@@ -64,7 +76,7 @@ class AppFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setPlainPassword('password');
             
-
+            $users[] = $user;
             $manager->persist($user);
         }
      
@@ -74,11 +86,8 @@ class AppFixtures extends Fixture
         for ($l=1; $l<=5; $l++) {
             $booking = new Booking();
             $booking->setGuestsNumber(mt_rand(1, 6));
-            $booking->setBookingHour(new \DateTimeImmutable('now'));
+            $booking->setBookingHour('12h30');
             
-           
-
-
             $manager->persist($booking); 
         }
      

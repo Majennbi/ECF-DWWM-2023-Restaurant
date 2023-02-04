@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookingRepository;
 use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -25,12 +26,9 @@ class Booking
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $bookingDate;
 
-    #[ORM\Column(type: 'time_immutable')]
+    #[ORM\Column(type: 'string')]
     #[Assert\NotNull()]
-    private ?\DateTimeImmutable $bookingHour;
-
-    /*#[ORM\Column(type: 'boolean', nullable: true)]
-    private ?bool $availableSeats;*/
+    private ?string $bookingHour;
 
      public function __construct()
     {
@@ -67,27 +65,15 @@ class Booking
     }
     
 
-    public function getBookingHour(): ?\DateTimeImmutable
+    public function getBookingHour(): ?string
     {
         return $this->bookingHour;
     }
 
-    public function setBookingHour(?\DateTimeImmutable $bookingHour): self
+    public function setBookingHour(?string $bookingHour): self
     {
         $this->bookingHour = $bookingHour;
 
         return $this;
     }
-
-    /*public function getAvailableSeats(): ?bool
-    {
-        return $this->availableSeats;
-    }
-
-    public function setAvailableSeats(?bool $availableSeats): self
-    {
-        $this->availableSeats = $availableSeats;
-
-        return $this;
-    }*/
 }

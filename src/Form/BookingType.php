@@ -21,6 +21,7 @@ class BookingType extends AbstractType
     {
     
         $builder
+        //Ajouter le nom de la réservation
             ->add('guestsNumber', ChoiceType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -62,20 +63,6 @@ class BookingType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 
             ])
-
-            /*->add('timeSlot', TimeType::class, [
-                'label' => 'Créneau horaire',
-                'input' => 'datetime',
-                'widget' => 'choice',
-                'hours' => [12, 13, 14],
-                'minutes' => [0, 15, 30, 45],
-                'placeholder' => [
-                    'hour' => 'Heure',
-                    'minute' => 'Minute',
-                ],
-                'choice_translation_domain' => false,
-                'choices' => array_combine($this->timeSlots, $this->timeSlots),
-            ])*/
            
             
                 ->add('bookingHour', ChoiceType::class, [
@@ -87,69 +74,22 @@ class BookingType extends AbstractType
                         'class' => 'form-label mt-4',
                     ],
                     'choices' => [
-                        '12h00' => '12:00',
-                        '12h15' => '12:15',
-                        '12h30' => '12:30',
-                        '12h45' => '12:45',
-                        '13h00' => '13:00',
-                        '13h15' => '13:15',
-                        '13h30' => '13:30',
-                        '13h45' => '13:45',
-                        '14h00' => '14:00',
-                        '14h15' => '14:15',
-                        '14h30' => '14:30',
-                        '14h45' => '14:45',],
-                    'multiple' => false,
-                    'expanded' => true,
+                        '12h00' => '12h00',
+                        '12h15' => '12h15',
+                        '12h30' => '12h30',
+                        '12h45' => '12h45',
+                        '13h00' => '13h00',
+                        '13h15' => '13h15',
+                        '13h30' => '13h30',
+                        '13h45' => '13h45',
+                        '14h00' => '14h00',
+                      ],
+                        'multiple' => false,
+                        'expanded' => true,
                     
                     'placeholder' => 'Select a time slot',
                 ])
-                
-            /*->add('availableSeats', DateIntervalType::class , [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Nombre de places disponibles',
-                'label_attr' => [
-                    'class' => 'form-label mt-4',
-                ],
-                'constraints' => [
-                    new NotNull(),
-                ],
-                'widget' => 'choice',
-                'with_years' => false,
-                'with_months' => false,
-                'with_days' => false,
-                'with_hours' => true,
-                'with_minutes' => true,
-                'hours' => range(0, 23),
-                'minutes' => [0, 15, 30, 45],
-                'input' => 'string',
-                
-                'labels' => [
-                    'hours' => 'Heures',
-                    'minutes' => 'Minutes',
-                ],
-
-            ])
-            ->add('bookingHour', TimeType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Heure de réservation',
-                'label_attr' => [
-                    'class' => 'form-label mt-4',
-                ],
-                'constraints' => [
-                    new NotNull(),
-                ],
-                'input'  => 'timestamp',
-                'widget' => 'choice',
-                'hours' => range(12, 13),
-                'minutes' => range(0, 45, 15),
-            ])*/
             
-
 
             ->add('submit', SubmitType::class, [
                 'attr' => [
