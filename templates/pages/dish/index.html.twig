@@ -9,8 +9,6 @@
         <h1>Carte du restaurant</h1>
             <p>Voici la carte du restaurant</p>
 
-    <a href="{{ path('dish.new') }}" class="btn btn-primary mb-4">Ajouter un plat</a>
-
     {% for message in app.flashes('success') %}
         <div class="alert alert-success mt-4">
             {{ message }}
@@ -35,9 +33,6 @@ style="witdh: 100%">
                     <p>{{ dish.title }}</p>
                     <p>{{ dish.description }}</p>
                     <p>{{ dish.price }} €</p>
-                    <!-- the image functionality is not implemented yet-->
-                    <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
-                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
                 </div> 
             {% endfor %}
       </div>
@@ -58,9 +53,6 @@ style="witdh: 100%">
                     <p>{{ dish.title }}</p>
                     <p>{{ dish.description }}</p>
                     <p>{{ dish.price }} €</p>
-                    <!-- the image functionality is not implemented yet-->
-                    <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
-                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
                 </div>
             {% endfor %}
       </div>
@@ -82,9 +74,6 @@ style="witdh: 100%">
                     <p>{{ dish.title }}</p>
                     <p>{{ dish.description }}</p>
                     <p>{{ dish.price }} €</p>
-                    <!-- the image functionality is not implemented yet-->
-                    <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
-                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
                 </div>                
             {% endfor %}
       </div>
@@ -106,9 +95,6 @@ style="witdh: 100%">
                     <p>{{ dish.title }}</p>
                     <p>{{ dish.description }}</p>
                     <p>{{ dish.price }} €</p>
-                     <!-- the image functionality is not implemented yet-->
-                     <a href="{{ path('dish.edit', {'id': dish.id}) }}" class="btn btn-info">Modifier</a>
-                    <a href="{{ path('dish.delete', {'id': dish.id}) }}" class="btn btn-danger">Supprimer</a>
                 </div> 
             {% endfor %}
       </div>

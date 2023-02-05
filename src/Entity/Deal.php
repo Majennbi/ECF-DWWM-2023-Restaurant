@@ -1,4 +1,5 @@
 <?php
+//Code for to use later for the deal entity
 
 namespace App\Entity;
 

@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
         public function load(ObjectManager $manager): void
         {
         
-        //Deal
+        /*Deal
         for ($i=1; $i<=50; $i++) {
             $deal = new Deal();
             $deal->setTitle($this->faker->word());
@@ -38,10 +38,10 @@ class AppFixtures extends Fixture
             $deal->setDescription($this->faker->paragraph(2));
 
             $manager->persist($deal);
-        }
+        }*/
 
         //Dish
-        for ($j=1; $j<=100; $j++) {
+        for ($j=1; $j<=3; $j++) {
             $dish = new Dish ();
             $dish->setCategory('entrée');
             $dish->setTitle($this->faker->word());

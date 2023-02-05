@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\DishRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Repository\DishRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: DishRepository::class)]
 #[UniqueEntity('title', message: 'Ce plat existe déjà')]
@@ -35,9 +38,14 @@ class Dish
     #[Assert\NotNull()]
     private ?float $price = null;
 
-    /* * The image functionality is not yet implemented
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $image = null;*/
+    #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\NotNull()]
+    private ?DateTimeImmutable $updatedAt;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTimeImmutable(); 
+    }
 
     public function getId(): ?int
     {
@@ -92,16 +100,15 @@ class Dish
         return $this;
     }
 
-    /* The image functionality is not yet implemented
-    public function getImage()
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->image;
+        return $this->updatedAt;
     }
 
-    public function setImage($image): self
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
-        $this->image = $image;
+        $this->updatedAt = new \DateTimeImmutable();
 
         return $this;
-    }*/
+    }
 }
