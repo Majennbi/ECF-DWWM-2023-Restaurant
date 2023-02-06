@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Dish;
 use App\Entity\User;
+use App\Entity\Booking;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -36,6 +37,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Plats de la carte', 'fas fa-utensils', Dish::class);
+        yield MenuItem::linkToCrud('Réservations', 'fas fa-calendar-check', Booking::class);
         
     }
 }

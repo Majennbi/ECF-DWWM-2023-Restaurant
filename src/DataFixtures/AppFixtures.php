@@ -85,6 +85,7 @@ class AppFixtures extends Fixture
         //Booking
         for ($l=1; $l<=5; $l++) {
             $booking = new Booking();
+            $booking->setBookingName($this->faker->name());
             $booking->setGuestsNumber(mt_rand(1, 6));
             $booking->setBookingHour('12h30');
             

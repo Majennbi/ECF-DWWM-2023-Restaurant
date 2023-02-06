@@ -16,6 +16,10 @@ class Booking
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
+    #[ORM\Column(length: 50)]
+    #[Assert\Length(min: 3, max: 50)]
+    private ?string $bookingName = null;
 
     #[ORM\Column]
     #[Assert\NotBlank()]
@@ -38,6 +42,18 @@ class Booking
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getBookingName(): ?string
+    {
+        return $this->bookingName;
+    }
+
+    public function setBookingName(string $bookingName): self
+    {
+        $this->bookingName = $bookingName;
+
+        return $this;
     }
 
     public function getGuestsNumber(): ?int

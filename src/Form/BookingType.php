@@ -22,6 +22,24 @@ class BookingType extends AbstractType
     
         $builder
         //Ajouter le nom de la réservation
+            ->add('bookingName', null, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => 3,
+                    'maxlength' => 50,
+                ],
+                'label' => 'Nom de la réservation',
+                'label_attr' => [
+                    'class' => 'form-label mt-4',
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                    new Length([
+                        'min' => 3,
+                        'max' => 50,
+                    ]),
+                ],
+            ])
             ->add('guestsNumber', ChoiceType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -68,11 +86,21 @@ class BookingType extends AbstractType
                 ->add('bookingHour', ChoiceType::class, [
                     'attr' => [
                         'class' => 'form-control',
+                        'minlength' => 1,
+                        'maxlength' => 6,
                     ],
-                    'label' => 'Heure de réservation',
+                    'label' => 'Nombre de couverts',
                     'label_attr' => [
                         'class' => 'form-label mt-4',
                     ],
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length([
+                            'min' => 1,
+                            'max' => 6,
+                        ]),
+                    ],
+                    'placeholder' => 'Choisissez une heure',
                     'choices' => [
                         '12h00' => '12h00',
                         '12h15' => '12h15',
@@ -83,12 +111,10 @@ class BookingType extends AbstractType
                         '13h30' => '13h30',
                         '13h45' => '13h45',
                         '14h00' => '14h00',
-                      ],
-                        'multiple' => false,
-                        'expanded' => true,
+                  
                     
-                    'placeholder' => 'Select a time slot',
-                ])
+                    
+                ]])
             
 
             ->add('submit', SubmitType::class, [
