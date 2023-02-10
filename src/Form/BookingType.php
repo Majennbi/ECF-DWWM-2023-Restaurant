@@ -3,24 +3,56 @@
 namespace App\Form;
 
 use App\Entity\Booking;
+use App\Entity\OpeningHours;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use PhpParser\Node\Expr\BinaryOp\GreaterOrEqual;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Length;
+use Twig\Node\Expression\Binary\GreaterEqualBinary;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Expression;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 
 class BookingType extends AbstractType
 {
+    private $entityManager;
+
+public function __construct(EntityManagerInterface $entityManager)
+{
+    $this->entityManager = $entityManager;
+}
+
+    private function getOpeningHoursChoices(): array
+    {
+        $openingHours = $this->entityManager
+            ->getRepository(OpeningHours::class)
+            ->findAll();
+
+        $choices = [];
+        foreach ($openingHours as $openingHour) {
+            $choices[$openingHour->getStartHour() . ' - ' . $openingHour->getEndHour()] = $openingHour;
+        }
+
+        return $choices;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-    
+       
         $builder
+
         //Ajouter le nom de la réservation
             ->add('bookingName', null, [
                 'attr' => [
@@ -67,6 +99,7 @@ class BookingType extends AbstractType
                 ],
             ] )
             ->add('bookingDate', DateType::class, [
+                'input'  => 'datetime_immutable',
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -81,40 +114,42 @@ class BookingType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 
             ])
-           
+                
+            ->add('openingHours', EntityType::class, [
+                'class' => OpeningHours::class,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Horaire d\'ouverture du restaurant',
+                'label_attr' => [
+                    'class' => 'form-label mt-4',
+                ],
+                'disabled' => true,
+                'choice_label' => function (OpeningHours $openingHour) {
+                    return $openingHour->getStartHour()->format('Y-m-d H:i:s') . ' - ' . $openingHour->getEndHour()->format('Y-m-d H:i:s');
+                },
+                
+                
+                ])
+        
             
-                ->add('bookingHour', ChoiceType::class, [
+                ->add('bookingHour', DateTimeType::class, [
+                    'input'  => 'datetime_immutable',
+
+                    'widget' => 'single_text',
+                    
                     'attr' => [
                         'class' => 'form-control',
-                        'minlength' => 1,
-                        'maxlength' => 6,
                     ],
-                    'label' => 'Nombre de couverts',
+                    'label' => 'Heure de réservation',
                     'label_attr' => [
-                        'class' => 'form-label mt-4',
+                        'class' => 'form-label mt-4', 
                     ],
                     'constraints' => [
-                        new NotBlank(),
-                        new Length([
-                            'min' => 1,
-                            'max' => 6,
-                        ]),
+                        
                     ],
-                    'placeholder' => 'Choisissez une heure',
-                    'choices' => [
-                        '12h00' => '12h00',
-                        '12h15' => '12h15',
-                        '12h30' => '12h30',
-                        '12h45' => '12h45',
-                        '13h00' => '13h00',
-                        '13h15' => '13h15',
-                        '13h30' => '13h30',
-                        '13h45' => '13h45',
-                        '14h00' => '14h00',
-                  
                     
-                    
-                ]])
+                    ])
             
 
             ->add('submit', SubmitType::class, [
@@ -130,6 +165,7 @@ class BookingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Booking::class,
+            
         ]);
     }
 }

@@ -7,6 +7,16 @@
         <h1 class="text-center mt-4">Réservez votre table</h1>
        {{ form_start(form) }}
 
+        {% if form.bookingHour.vars.errors %}
+    
+        {% for error in form.bookingHour.vars.errors %}
+        <div class="alert alert-warning mt-4">
+            {{ error.message }}
+        </div>
+        {% endfor %}
+    </ul>
+{% endif %}
+
        <div class="form-group">
         {{ form_label(form.bookingName) }}
         {{ form_widget(form.bookingName)}}
@@ -31,14 +41,22 @@
         </div>
     </div>
 
+     <div class="form-group">
+    {{ form_label(form.openingHours) }}
+    {{ form_widget(form.openingHours)}}
+    </div>
+
     <div class="form-group">
     {{ form_label(form.bookingHour) }}
     {{ form_widget(form.bookingHour)}}
     </div>
 
+    
+
     <div class="form-group">
         {{ form_row(form.submit) }}
     </div>
+    
 </div>
 {{ form_end(form) }}
 

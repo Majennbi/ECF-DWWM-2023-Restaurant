@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Entity\OpeningHours;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookingRepository;
-use phpDocumentor\Reflection\Types\Boolean;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Custom;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
+
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -29,14 +34,46 @@ class Booking
     #[ORM\Column(type: 'date_immutable')]
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $bookingDate;
+    //#[Assert\LessThanOrEqual('startHour', message: 'La date de réservation doit être égale à l\'heure de réservation')]
+   //#[Assert\GreaterThanOrEqual('today UTC', message: 'La date de réservation doit être égale à {{ compared_value_type }}')]
+    
 
-    #[ORM\Column(type: 'string')]
-    #[Assert\NotNull()]
-    private ?string $bookingHour;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $bookingHour;
+    #[Assert\Callback(callback:"validateBookingHourIsBetweenOpeningHours")]
 
+    #[ORM\ManyToOne(targetEntity: OpeningHours::class, inversedBy: 'booking', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: true)]
+    
+    
+    private $openingHours;
+  
      public function __construct()
     {
         $this->bookingDate = new \DateTimeImmutable();
+        $this->bookingHour = new \DateTimeImmutable()
+        
+       ;
+    }
+
+    public function validateBookingHourIsBetweenOpeningHours(ExecutionContextInterface $context): void
+    {
+        echo 'Validation is running';
+        $openingHours = $this->getOpeningHours();
+        $bookingHour = $this->getBookingHour();
+    
+        if (!$openingHours || !$bookingHour) {
+            return;
+        }
+    
+        $startHour = $openingHours->getStartHour();
+        $endHour = $openingHours->getEndHour();
+        if ($bookingHour < $startHour || $bookingHour >= $endHour) {
+            $context->buildViolation('The booking hour must be between the opening hours.')
+                ->setParameter('{{ start_hour }}', $startHour->format('Y-m-d H:i:s'))
+                ->setParameter('{{ end_hour }}', $endHour->format('Y-m-d H:i:s'))
+                ->addViolation();
+        }
     }
 
     public function getId(): ?int
@@ -73,23 +110,37 @@ class Booking
         return $this->bookingDate;
     }
 
-    public function setBookingDate(\DateTime $bookingDate): self
+    public function setBookingDate(\DateTimeImmutable $bookingDate): self
     {
-        $this->bookingDate = new \DateTimeImmutable($bookingDate->format('Y-m-d H:i:s'));
+        $this->bookingDate = $bookingDate;
     
         return $this;
     }
-    
 
-    public function getBookingHour(): ?string
+    public function getBookingHour(): ?\DateTimeImmutable
     {
         return $this->bookingHour;
     }
 
-    public function setBookingHour(?string $bookingHour): self
+    public function setBookingHour(\DateTimeImmutable $bookingHour): self
     {
         $this->bookingHour = $bookingHour;
 
         return $this;
     }
+    
+
+    public function getOpeningHours(): ?OpeningHours
+    {
+        return $this->openingHours;
+    }
+
+    public function setOpeningHours(?OpeningHours $openingHours): self
+    {
+        $this->openingHours = $openingHours;
+
+        return $this;
+    }
+
 }
+ 
