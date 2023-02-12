@@ -7,10 +7,11 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class BookingHourWithinOpeningHours extends Constraint
 {
-    public string $message = 'The booking hour must be between the opening hours.';
+    public $openingHours;
+    public $message = 'The selected hour is outside of the opening hours.';
 
-    public function getTargets(): string
+    public function validatedBy()
     {
-        return self::CLASS_CONSTRAINT;
+        return BookingHourValidator::class;
     }
 }

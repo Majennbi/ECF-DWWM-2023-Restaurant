@@ -87,8 +87,8 @@ class AppFixtures extends Fixture
         //OpeningHours
         for ($m=1; $m<=1; $m++) {
             $OpeningHours = new OpeningHours();
-            $OpeningHours->setStartHour(new \DateTimeImmutable());
-            $OpeningHours->setEndHour(new \DateTimeImmutable());
+            $OpeningHours->setStartHour($this->faker->dateTime());
+            $OpeningHours->setEndHour($this->faker->dateTime());
             
             $manager->persist($OpeningHours); 
         }
@@ -100,7 +100,7 @@ class AppFixtures extends Fixture
             $booking = new Booking();
             $booking->setBookingName($this->faker->name());
             $booking->setGuestsNumber(mt_rand(1, 6));
-            $booking->setBookingHour(new \DateTimeImmutable());
+            $booking->setBookingHour($this->faker->dateTime());
             $booking->setOpeningHours($OpeningHours);
            
            

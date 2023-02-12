@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Entity\OpeningHours;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookingRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Custom;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -34,13 +35,9 @@ class Booking
     #[ORM\Column(type: 'date_immutable')]
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $bookingDate;
-    //#[Assert\LessThanOrEqual('startHour', message: 'La date de réservation doit être égale à l\'heure de réservation')]
-   //#[Assert\GreaterThanOrEqual('today UTC', message: 'La date de réservation doit être égale à {{ compared_value_type }}')]
     
-
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $bookingHour;
-    #[Assert\Callback(callback:"validateBookingHourIsBetweenOpeningHours")]
+   #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTime $bookingHour = null;
 
     #[ORM\ManyToOne(targetEntity: OpeningHours::class, inversedBy: 'booking', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
@@ -51,12 +48,12 @@ class Booking
      public function __construct()
     {
         $this->bookingDate = new \DateTimeImmutable();
-        $this->bookingHour = new \DateTimeImmutable()
+        $this->bookingHour = new \DateTime()
         
        ;
     }
 
-    public function validateBookingHourIsBetweenOpeningHours(ExecutionContextInterface $context): void
+    /*public function validateBookingHourIsBetweenOpeningHours(ExecutionContextInterface $context): void
     {
         echo 'Validation is running';
         $openingHours = $this->getOpeningHours();
@@ -74,7 +71,7 @@ class Booking
                 ->setParameter('{{ end_hour }}', $endHour->format('Y-m-d H:i:s'))
                 ->addViolation();
         }
-    }
+    }*/
 
     public function getId(): ?int
     {
@@ -117,12 +114,12 @@ class Booking
         return $this;
     }
 
-    public function getBookingHour(): ?\DateTimeImmutable
+    public function getBookingHour(): ?\DateTime
     {
         return $this->bookingHour;
     }
 
-    public function setBookingHour(\DateTimeImmutable $bookingHour): self
+    public function setBookingHour(\DateTime $bookingHour): self
     {
         $this->bookingHour = $bookingHour;
 

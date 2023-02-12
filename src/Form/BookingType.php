@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Booking;
 use App\Entity\OpeningHours;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use PhpParser\Node\Expr\BinaryOp\GreaterOrEqual;
@@ -22,8 +24,8 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-
-
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class BookingType extends AbstractType
 {
@@ -126,17 +128,23 @@ public function __construct(EntityManagerInterface $entityManager)
                 ],
                 'disabled' => true,
                 'choice_label' => function (OpeningHours $openingHour) {
-                    return $openingHour->getStartHour()->format('Y-m-d H:i:s') . ' - ' . $openingHour->getEndHour()->format('Y-m-d H:i:s');
+                    return $openingHour->getStartHour()->format('H:i:s') . ' - ' . $openingHour->getEndHour()->format('H:i:s');
                 },
                 
                 
                 ])
         
             
-                ->add('bookingHour', DateTimeType::class, [
-                    'input'  => 'datetime_immutable',
-
-                    'widget' => 'single_text',
+                ->add('bookingHour', TimeType::class, [
+                    'input'  => 'datetime',
+                    
+                    'html5' => false,
+                    'widget' => 'choice',
+                    
+                    'attr' => [
+                        'min' => '05:00',
+                        'max' => '18:00',
+                    ],
                     
                     'attr' => [
                         'class' => 'form-control',
@@ -148,17 +156,40 @@ public function __construct(EntityManagerInterface $entityManager)
                     'constraints' => [
                         
                     ],
-                    
                     ])
             
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $booking = $event->getData();
+                $form = $event->getForm();
+        
+                // checks if the Booking object is between the opening hours
+                // If no data is passed to the form, the data is "null".
+                // This should be considered a new "Product"
+                if ($booking && $booking->getOpeningHours() !== null) {
+                    $startHour = $booking->getOpeningHours()->getStartHour();
+                    $endHour = $booking->getOpeningHours()->getEndHour();
+        
+                    $form->add('bookingHour', null, [
+                        'constraints' => [
+                            new GreaterThanOrEqual([
+                                'value' => $startHour,
+                                'message' => 'The booking hour must be greater than or equal to the start hour.'
+                            ]),
+                            new LessThanOrEqual([
+                                'value' => $endHour,
+                                'message' => 'The booking hour must be less than or equal to the end hour.'
+                            ]),
+                        ]
+                    ]);
+                }
+            })
 
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',
                 ],
                 'label' => 'Réserver',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

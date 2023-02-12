@@ -2,24 +2,27 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Booking;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OpeningHoursRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 #[ORM\Entity(repositoryClass: OpeningHoursRepository::class)]
 class OpeningHours
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?\DateTimeImmutable $startHour = null;
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $startHour = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?\DateTimeImmutable $endHour = null;
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $endHour = null;
 
     #[ORM\OneToMany(mappedBy: 'openingHours', targetEntity: Booking::class)]
     private $booking;
@@ -28,8 +31,8 @@ class OpeningHours
     {
 
         $this->booking = new ArrayCollection();
-        $this->startHour = new \DateTimeImmutable();
-        $this->endHour = new \DateTimeImmutable();
+        $this->startHour = new \DateTime();
+        $this->endHour = new \DateTime();
       
     }
    
@@ -38,24 +41,24 @@ class OpeningHours
         return $this->id;
     }
 
-    public function getStartHour(): ?\DateTimeImmutable
+    public function getStartHour(): ?\DateTime
     {
         return $this->startHour;
     }
 
-    public function setStartHour(\DateTimeImmutable $startHour): self
+    public function setStartHour(\DateTime $startHour): self
     {
         $this->startHour = $startHour;
 
         return $this;
     }
 
-    public function getEndHour(): ?\DateTimeImmutable
+    public function getEndHour(): ?\DateTime
     {
         return $this->endHour;
     }
 
-    public function setEndHour(\DateTimeImmutable $endHour): self
+    public function setEndHour(\DateTime $endHour): self
     {
         $this->endHour = $endHour;
 
