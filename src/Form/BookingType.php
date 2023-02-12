@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Length;
 use Twig\Node\Expression\Binary\GreaterEqualBinary;
 use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Expression;
@@ -26,33 +25,16 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
+
+
 
 class BookingType extends AbstractType
 {
-    private $entityManager;
-
-public function __construct(EntityManagerInterface $entityManager)
-{
-    $this->entityManager = $entityManager;
-}
-
-    private function getOpeningHoursChoices(): array
-    {
-        $openingHours = $this->entityManager
-            ->getRepository(OpeningHours::class)
-            ->findAll();
-
-        $choices = [];
-        foreach ($openingHours as $openingHour) {
-            $choices[$openingHour->getStartHour() . ' - ' . $openingHour->getEndHour()] = $openingHour;
-        }
-
-        return $choices;
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-       
+     
         $builder
 
         //Ajouter le nom de la réservation
@@ -121,6 +103,7 @@ public function __construct(EntityManagerInterface $entityManager)
                 'class' => OpeningHours::class,
                 'attr' => [
                     'class' => 'form-control',
+                    
                 ],
                 'label' => 'Horaire d\'ouverture du restaurant',
                 'label_attr' => [
@@ -128,23 +111,17 @@ public function __construct(EntityManagerInterface $entityManager)
                 ],
                 'disabled' => true,
                 'choice_label' => function (OpeningHours $openingHour) {
-                    return $openingHour->getStartHour()->format('H:i:s') . ' - ' . $openingHour->getEndHour()->format('H:i:s');
+                    return $openingHour->getStartHour()->format('H:i') . ' - ' . $openingHour->getEndHour()->format('H:i');
                 },
                 
                 
-                ])
-        
-            
+                ])  
+                 
                 ->add('bookingHour', TimeType::class, [
                     'input'  => 'datetime',
-                    
+                    'minutes' => range(0, 59, 15),
                     'html5' => false,
                     'widget' => 'choice',
-                    
-                    'attr' => [
-                        'min' => '05:00',
-                        'max' => '18:00',
-                    ],
                     
                     'attr' => [
                         'class' => 'form-control',
@@ -153,12 +130,11 @@ public function __construct(EntityManagerInterface $entityManager)
                     'label_attr' => [
                         'class' => 'form-label mt-4', 
                     ],
-                    'constraints' => [
-                        
-                    ],
                     ])
+
+    
             
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            /*->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $booking = $event->getData();
                 $form = $event->getForm();
         
@@ -182,7 +158,7 @@ public function __construct(EntityManagerInterface $entityManager)
                         ]
                     ]);
                 }
-            })
+            })*/
 
             ->add('submit', SubmitType::class, [
                 'attr' => [

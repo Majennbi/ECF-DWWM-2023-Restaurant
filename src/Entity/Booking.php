@@ -36,7 +36,7 @@ class Booking
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $bookingDate;
     
-   #[ORM\Column(type: Types::TIME_MUTABLE)]
+   #[ORM\Column(type: Types::TIME_MUTABLE,)]
     private ?\DateTime $bookingHour = null;
 
     #[ORM\ManyToOne(targetEntity: OpeningHours::class, inversedBy: 'booking', cascade: ['persist'])]

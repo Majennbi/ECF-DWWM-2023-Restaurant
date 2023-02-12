@@ -24,9 +24,6 @@ services:
         resource: "../src/EntityListener"
         tags: ["doctrine.orm.entity_listener"]
 
-    App\Validator\BookingHourValidator:
-        tags:
-            - { name: validator.constraint_validator, alias: booking_hour_within_opening_hours }
 
         
 

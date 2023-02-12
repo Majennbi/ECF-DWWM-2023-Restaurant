@@ -30,10 +30,11 @@ class DishController extends AbstractController
             $item->expiresAfter(15);
             return $repository->findAll(null);
         });*/ //cache not working like that, check later
-
+      
         return $this->render('pages/dish/index.html.twig', [
-            'dishes' => $repository->findAll() //[] *Test message si données non récupérées*
+            'dishes' => $repository->findAll(), //[] *Test message si données non récupérées*
             
+           
         ]);
     }
 }

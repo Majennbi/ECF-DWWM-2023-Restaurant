@@ -44,7 +44,7 @@ class AppFixtures extends Fixture
         //Dish
         for ($j=1; $j<=3; $j++) {
             $dish = new Dish ();
-            $dish->setCategory('entrée');
+            $dish->setCategory('Entrée');
             $dish->setTitle($this->faker->word());
             $dish->setPrice(mt_rand(1, 50));
             $dish->setDescription($this->faker->paragraph(2));
@@ -87,8 +87,8 @@ class AppFixtures extends Fixture
         //OpeningHours
         for ($m=1; $m<=1; $m++) {
             $OpeningHours = new OpeningHours();
-            $OpeningHours->setStartHour($this->faker->dateTime());
-            $OpeningHours->setEndHour($this->faker->dateTime());
+            $OpeningHours->setStartHour($this->faker->dateTime('format: H:i'));
+            $OpeningHours->setEndHour($this->faker->dateTime('format: H:i'));
             
             $manager->persist($OpeningHours); 
         }
@@ -100,7 +100,7 @@ class AppFixtures extends Fixture
             $booking = new Booking();
             $booking->setBookingName($this->faker->name());
             $booking->setGuestsNumber(mt_rand(1, 6));
-            $booking->setBookingHour($this->faker->dateTime());
+            $booking->setBookingHour($this->faker->dateTime('format: H:i'));
             $booking->setOpeningHours($OpeningHours);
            
            
