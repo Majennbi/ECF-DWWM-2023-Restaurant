@@ -27,9 +27,10 @@ class DishCrudController extends AbstractCrudController
 
             ->setPageTitle('index', 'Le Quai Antique - %entity_label_plural%')
 
-            ->setPaginatorPageSize(10)
+            ->setPaginatorPageSize(10);
 
-            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
+            //->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig'); 
+            //Disable for now, it's not working
     } 
 
     

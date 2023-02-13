@@ -1,0 +1,51 @@
+body {
+    background-color: #F7F7F2;
+  
+}
+
+.btn { 
+    font-size: 20px 
+}
+
+/*Header*/
+
+.navbar {
+    background-color: #212F44;
+    padding: 0.5rem ;
+    
+}
+
+.navbar-brand > img {
+    width: 10vw;
+    height: 10vh;
+}
+
+.navbar-nav > li > a {
+    font-size: 0.9rem;
+    color: #F7F7F2;
+    
+}
+
+.btn-login, .btn-signin {
+    border-radius: 15px;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.5rem; 
+}
+
+.btn-login {
+    background-color: #BC7415;
+    color: white;
+}
+
+.btn-login:hover, .btn-signin:hover {
+    background-color: #212F44;
+    color: #F7F7F2;
+    border: 1px solid #F7F7F2;
+}
+
+.btn-signin {
+    background-color: #DABB95;
+    color: #212F44;
+}
+
+
