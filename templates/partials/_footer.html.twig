@@ -1,6 +1,30 @@
 <footer>
-	<div class="footer-copyright text-center pt-5 mt-5">© 2023 Copyright:
-		<a href="/">
-			Benjamin MICHEL</a>
+	<section class="footer">
+	<div class="desktopfooter">
+	<div>
+		<h3 class="footer-subtitle">Suivez-nous sur les réseaux</h3>
+		<div class="socialmediafooter">
+                      <a href="#" class="fa fa-facebook"></a>
+                      <a href="#" class="fa fa-twitter"></a>
+                      <a href="#" class="fa fa-instagram"></a>
+                      <a href="#" class="fa fa-youtube"></a>
+                  </div>
 	</div>
+	<div>
+		<h3 class="footer-subtitle">Pour réserver, c'est juste ici</h3>
+		<div class="bookingfooter">
+		<a class="btn btn-footer" href="{{ path ('booking.index') }}">Réserver</a>
+		</div>
+	</div>
+	
+	</div>
+	<div class="footer-links">
+		<a href={{ path('security.login') }}>Se connecter</a>
+		<a href={{ path ('dish.index') }}>Voir la carte</a>
+		<a href="#">Politique de confidentialité</a>
+		<a href="#">Mentions légales</a>
+	</div>
+	<p class="footer-copyright text-center">© 2023 Copyright: Benjamin MICHEL
+	</p>
+	</section>
 </footer>

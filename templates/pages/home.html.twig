@@ -3,23 +3,46 @@
 {% block title %}Le quai antique - accueil {% endblock %}
 
 {% block body %}
-<div class="home-bg">
-<div>
-  <h1 class="display-4 home-title">Le site du restaurant Le quai antique est en cours de construction.
-  Encore un peu de patience </h1>
 
+<section class="home-bg">
+  <h1 class="display-4 home-title">Bienvenue chez le quai antique</h1>
   {% for message in app.flashes('success') %}
         <div class="alert alert-success mt-4">
             {{ message }}
         </div>
     {% endfor %}
 
-  <p class="lead">Le quai antique va bientôt ouvrir ses portes, restés connectés</p>
-  <hr class="my-4">
-  <p>L'application va être crééer de A à Z par Benjamin MICHEL, en formation de dev</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">En savoir plus</a>
-  </p>
+  <h2 class="lead home-subtitle">La promesse d'un voyage savoyard</h2>
+  <a class="btn btn-booking" href="{{ path ('booking.index') }}">Réserver</a>
+  
+
+  </section>
+
+  <section class="presentation-container">
+  <h2 class="presentation-title">Des plats gastronomiques, sans artifice</h2>
+  <div class="home-presentation">
+    <div class="presentation-text">
+    <p>Le restaurant Le Quai Antique vous propose une cuisine traditionnelle et savoyarde, élaborée 
+    à partir de produits frais et de saison. Le chef vous propose une carte variée et raffinée, qui 
+    vous fera découvrir les saveurs de la région </p>
+  
+    </div>
   </div>
-</div>
+
+  <div>
+   <a class="btn btn-dishes" href={{ path ('dish.index') }} type="button">Consulter la carte</a>
+  </div>
+
+   <div class="home-presentation2">
+    <div class="presentation-text">
+    <p> Nos plats sont cuisinés pour vous offrir un moment de plaisir et de convivialité.
+    Nous vous accueillons dans un cadre authentique et raffiné, pour vous faire découvrir ou redécouvrir
+    la cuisine savoyarde.
+    </p>
+    </div>
+  </div>
+
+  </section>
+  
+
 {% endblock %}
