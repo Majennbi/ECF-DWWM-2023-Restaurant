@@ -157,8 +157,10 @@ body {
 .home-presentation, .home-presentation2 {
     background-repeat: no-repeat;
     background-size: cover;
-    min-width: 80vw;
+    min-width: 60vw;
     min-height: 60vh;
+    max-width: 70vw;
+  
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,19 +176,21 @@ body {
     background-image: url(../images/home-presentation2.jpg);
 }
 
-.presentation-title {
-    font-size: 2rem;
+
+.h2-title {
+    font-size: 2.5rem;
     font-weight: 600;
     text-align: center;
     color: #6C7484;
     font-family: 'Lora', serif;
     margin: 2rem;
     text-transform: lowercase;
+   
 }
 
-.presentation-title::first-letter {
+.h2-title::first-letter {
     color: #212F44;
-    font-size: 2.5rem;
+    font-size: 4rem;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -207,17 +211,20 @@ body {
 }
 
 .btn-dishes {
-    background-color: #6C7484;
+    font-size: 1.2rem;
+    background-color: #212F44;
     color: #F7F7F2;
     border-radius: 15px;
     justify-self: center;
     align-self: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .btn-dishes:hover {
-    background-color: #212F44;
-    color: #F7F7F2;
-    border: 1px solid #F7F7F2;
+    background-color: #DABB95;
+    color: #6C7484;
+    border: 1px solid #6C7484;
 }
 
 .presentation-container {
@@ -225,7 +232,149 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
 
+
+
+@media screen and (min-width: 992px)
+{
+.btn-dishes-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #DABB95;
+    width: 100%;
+    height: 20vh;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.h2-title {
+    font-size: 3rem;
+}
+
+.h2-title::first-letter {
+
+    font-size: 4.5rem;
+
+}
+}
+
+/*DISHES*/
+
+.dishes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem;
+}
+
+.dishes-container > p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: justify;
+    color: #6C7484;
+    font-family: 'Hind Madurai', sans-serif;
+}
+
+.accordion {
+   width: 100%;
+   margin: 2rem;
+}
+
+.accordion-item {
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.accordion-button {
+    background-color: #212F44;
+    border-radius: 15px;
+}
+
+ .accordion-collapse {
+    
+    background-color: #DABB95;
+    border-radius: 15px;
+  
+}
+
+.accordion-body {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.dishes-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.dishes-maininfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dish-title, .dish-price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #212F44;
+    font-family: 'Lora', serif;
+    text-transform: uppercase;
+}
+
+.dish-desc {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #212F44;
+    font-family: 'Hind Madurai', sans-serif;
+    text-align: justify;
+}
+
+.accordion-button {
+    font-size: 1.5rem; 
+    width: 100%; 
+    height: 60px; 
+    padding: 10px
+}
+
+.accordion-button:hover {
+    background-color: #212F44;
+    color: #F7F7F2;
+}
+
+
+.accordion-button:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show>.btn-primary.dropdown-toggle:focus  {
+    background-color: #212F44;
+    color: #F7F7F2;
+
+   
+}
+
+.btn-primary:focus {
+    box-shadow:none;
+    background-color: #212F44;
+    color: #F7F7F2;
+}
+
+
+@media screen and (min-width: 992px)
+{
+.dishes-container {
+    margin-right: 6rem;
+    margin-left: 6rem;
+}
+
+.collapse {
+    justify-content: start;
+
+}
 }
 
 /*FOOTER*/
@@ -321,6 +470,7 @@ body {
     justify-self: center;
     align-self: center;
     margin: 0;
+    font-size: 1rem;
 }
 
 .btn-footer:hover {
