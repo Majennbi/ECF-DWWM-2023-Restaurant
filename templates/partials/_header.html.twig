@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href={{ path ('home.index') }}><img src='assets/images/logo-svg.svg'></a>
@@ -53,3 +54,8 @@
 		</div>
 	</div>
 </nav>
+ {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}

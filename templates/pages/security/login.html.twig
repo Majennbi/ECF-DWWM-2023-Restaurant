@@ -3,8 +3,8 @@
 {% block title %}Connexion à votre compte{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="text-center mt-4">Connexion à votre compte</h1>
+    <div class="form-container">
+        <h2 class="h2-title">Connexion à votre compte</h2>
 
          {% for message in app.flashes('success') %}
     <div class="alert alert-success mt-4">
@@ -30,10 +30,10 @@
                      </div>
 
                 
-                    <button type="submit" class="btn btn-primary mt-4">Se connecter</button>
-                     <a href="{{ path('security.registration') }}" class="btn btn-primary mt-4">Créer un compte</a>
+                    <button type="submit" class="btn btn-login-page mt-4">Se connecter</button>
+                     <a href="{{ path('security.registration') }}" class="btn btn-login-page mt-4">Créer un compte</a>
                 </form>
-            
+            </div>
 
 {% endblock %}
  

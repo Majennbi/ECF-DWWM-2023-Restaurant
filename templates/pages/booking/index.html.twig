@@ -3,8 +3,14 @@
 {% block title %}Réservez votre table - Le quai antique{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="text-center mt-4">Réservez votre table</h1>
+    <div class="form-container">
+        <h2 class="h2-title">Réservez votre table</h2>
+
+         {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
         
        {{ form_start(form) }}
         {% if form.vars.errors|length > 0 %}
@@ -48,10 +54,7 @@
     
     </div>
 
-   
-    
-
-    <div class="form-group">
+    <div class="form-group btn-booking-wrapper">
         {{ form_row(form.submit) }}
     </div>
     

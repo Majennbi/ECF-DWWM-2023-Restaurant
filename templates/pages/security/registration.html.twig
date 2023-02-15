@@ -3,9 +3,10 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="text-center mt-4">Inscription</h1>
+    <div class="form-container">
+        <h2 class="h2-title">Inscription</h2>
 
-        {{ form(form) }}
-
+        {{ form_start(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

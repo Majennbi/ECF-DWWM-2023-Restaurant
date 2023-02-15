@@ -123,9 +123,6 @@ class BookingType extends AbstractType
                     'html5' => false,
                     'widget' => 'choice',
                     
-                    'attr' => [
-                        'class' => 'form-control',
-                    ],
                     'label' => 'Heure de réservation',
                     'label_attr' => [
                         'class' => 'form-label mt-4', 
@@ -162,9 +159,9 @@ class BookingType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary mt-4',
+                    'class' => 'btn btn-booking-page mt-4',
                 ],
-                'label' => 'Réserver',
+                'label' => 'Soumettre',
             ]);
     }
 
