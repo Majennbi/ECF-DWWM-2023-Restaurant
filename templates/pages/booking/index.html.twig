@@ -1,70 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réservez votre table - Le quai antique{% endblock %}
-
-{% block body %}
-    <div class="form-container">
-        <h2 class="h2-title">Réservez votre table</h2>
-
-         {% for message in app.flashes('danger') %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
-    {% endfor %}
-        
-       {{ form_start(form) }}
-        {% if form.vars.errors|length > 0 %}
-    <div class="alert alert-danger">
-        {{ form_errors(form) }}
-    </div>
-{% endif %}
-       <div class="form-group">
-        {{ form_label(form.bookingName) }}
-        {{ form_widget(form.bookingName)}}
-        <div class="form-error">
-        {{ form_errors(form.bookingName) }}
-        </div>
-    </div>
-
-       <div class="form-group">
-        {{ form_label(form.guestsNumber) }}
-        {{ form_widget(form.guestsNumber)}}
-        <div class="form-error">
-        {{ form_errors(form.guestsNumber) }}
-        </div>
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.bookingDate) }}
-        {{ form_widget(form.bookingDate)}}
-        <div class="form-error">
-        {{ form_errors(form.bookingDate) }}
-        </div>
-    </div>
-
-     <div class="form-group">
-    {{ form_label(form.openingHours) }}
-    {{ form_widget(form.openingHours)}}
-    </div>
-    
-
-    <div class="form-group">
-    {{ form_label(form.bookingHour) }}
-    {{ form_widget(form.bookingHour)}}
-    
-    </div>
-
-    <div class="form-group btn-booking-wrapper">
-        {{ form_row(form.submit) }}
-    </div>
-    
-</div>
-{{ form_end(form) }}
-
-
-    </div>
+{% block title %}Réservez votre table - Le quai antique
 {% endblock %}
 
+{% block body %}
+	<div class="form-error"></div>
+	<div class="form-container">
+		<h2 class="h2-title">Réservez votre table</h2>
+
+		{% for message in app.flashes('danger') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+		{% if form.vars.errors|length > 0 %}
+			<div class="alert alert-danger">
+				{{ form_errors(form) }}
+			</div>
+		{% endif %}
+		<div class="form-group">
+			{{ form_label(form.bookingName) }}
+			{{ form_widget(form.bookingName)}}
+			<div class="form-error">
+				{{ form_errors(form.bookingName) }}
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.guestsNumber) }}
+			{{ form_widget(form.guestsNumber)}}
+			<div class="form-error">
+				{{ form_errors(form.guestsNumber) }}
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.bookingDate) }}
+			{{ form_widget(form.bookingDate)}}
+			<div class="form-error">
+				{{ form_errors(form.bookingDate) }}
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.openingHours) }}
+			{{ form_widget(form.openingHours)}}
+		</div>
 
 
-  
+		<div class="form-group">
+			{{ form_label(form.bookingHour) }}
+			{{ form_widget(form.bookingHour)}}
+
+		</div>
+
+
+		{{ form_row(form.submit) }}
+	</div>
+
+</div>
+{{ form_end(form) }}</div>{% endblock %}

@@ -21,23 +21,20 @@ class DishController extends AbstractController
      * @param DishRepository $repository
      * @return Response
      */
-    
+
     #[Route('/dish', name: 'dish.index', methods: ['GET'])]
     public function index(DishRepository $repository, Request $request): Response
-    {  
+    {
         /*$cache = new FilesystemAdapter();
         $data = $cache->get('dishes', function( ItemInterface $item) use ($repository) {
             $item->expiresAfter(15);
             return $repository->findAll(null);
         });*/ //cache not working like that, check later
-      
+
         return $this->render('pages/dish/index.html.twig', [
             'dishes' => $repository->findAll(), //[] *Test message si données non récupérées*
-            
-           
+
+
         ]);
     }
 }
-
-
-

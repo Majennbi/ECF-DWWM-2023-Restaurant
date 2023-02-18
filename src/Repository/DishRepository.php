@@ -23,7 +23,7 @@ class DishRepository extends ServiceEntityRepository
 
     public function save(Dish $entity, bool $flush = false): void
     {
-        
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {

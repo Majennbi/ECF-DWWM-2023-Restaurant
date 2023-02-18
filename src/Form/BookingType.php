@@ -34,10 +34,10 @@ class BookingType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-     
+
         $builder
 
-        //Ajouter le nom de la réservation
+            //Ajouter le nom de la réservation
             ->add('bookingName', null, [
                 'attr' => [
                     'class' => 'form-control',
@@ -81,7 +81,7 @@ class BookingType extends AbstractType
                     '5' => 5,
                     '6' => 6,
                 ],
-            ] )
+            ])
             ->add('bookingDate', DateType::class, [
                 'input'  => 'datetime_immutable',
                 'attr' => [
@@ -96,14 +96,14 @@ class BookingType extends AbstractType
                 ],
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-                
+
             ])
-                
+
             ->add('openingHours', EntityType::class, [
                 'class' => OpeningHours::class,
                 'attr' => [
                     'class' => 'form-control',
-                    
+
                 ],
                 'label' => 'Horaire d\'ouverture du restaurant',
                 'label_attr' => [
@@ -113,24 +113,24 @@ class BookingType extends AbstractType
                 'choice_label' => function (OpeningHours $openingHour) {
                     return $openingHour->getStartHour()->format('H:i') . ' - ' . $openingHour->getEndHour()->format('H:i');
                 },
-                
-                
-                ])  
-                 
-                ->add('bookingHour', TimeType::class, [
-                    'input'  => 'datetime',
-                    'minutes' => range(0, 59, 15),
-                    'html5' => false,
-                    'widget' => 'choice',
-                    
-                    'label' => 'Heure de réservation',
-                    'label_attr' => [
-                        'class' => 'form-label mt-4', 
-                    ],
-                    ])
 
-    
-            
+
+            ])
+
+            ->add('bookingHour', TimeType::class, [
+                'input'  => 'datetime',
+                'minutes' => range(0, 59, 15),
+                'html5' => false,
+                'widget' => 'choice',
+
+                'label' => 'Heure de réservation',
+                'label_attr' => [
+                    'class' => 'form-label mt-4',
+                ],
+            ])
+
+
+
             /*->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $booking = $event->getData();
                 $form = $event->getForm();
@@ -157,9 +157,10 @@ class BookingType extends AbstractType
                 }
             })*/
 
+
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-booking-page mt-4',
+                    'class' => 'btn btn-booking-page mt-4 s-booking js-label -js-submit',
                 ],
                 'label' => 'Soumettre',
             ]);
@@ -169,7 +170,7 @@ class BookingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Booking::class,
-            
+
         ]);
     }
 }
