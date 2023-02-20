@@ -173,9 +173,10 @@ body {
         background-color: #212F44;
         font-size: 1.2rem;
         width: 100%;
+        min-width: 300px;
+        left: -70px;
     }
 }
-
 
 /*-------HOME-------*/
 #ScrollBtn {
