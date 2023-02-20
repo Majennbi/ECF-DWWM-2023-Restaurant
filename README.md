@@ -55,8 +55,6 @@ Et générez les fixtures :
 
     php bin/console doctrine:fixtures:load
 
-Si vous le souhaitez vous pouvez également importer directement la base de données en utilisant
-le fichier le_quai_antique.sql
 ### Lancement du serveur symfony
 
 Pour accéder à l'application, vous n'avez plus qu'à lancer symfony :
