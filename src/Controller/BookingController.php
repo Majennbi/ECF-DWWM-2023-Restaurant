@@ -27,7 +27,7 @@ class BookingController extends AbstractController
 
         $form->handleRequest($request);
 
-        $openingHours = $manager->getRepository(OpeningHours::class)->findOneBy(['id' => '40']); //Prod :'3']);
+        $openingHours = $manager->getRepository(OpeningHours::class)->findOneBy(['id' => '3']); //Prod :'3']);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $booking = $form->getData();
