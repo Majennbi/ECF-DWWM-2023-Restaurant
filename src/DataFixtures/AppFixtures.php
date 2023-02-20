@@ -83,6 +83,7 @@ class AppFixtures extends Fixture
         //OpeningHours
         for ($m=1; $m<=1; $m++) {
             $OpeningHours = new OpeningHours();
+            $OpeningHours->setId('1');
             $OpeningHours->setStartHour($this->faker->dateTime('format: H:i'));
             $OpeningHours->setEndHour($this->faker->dateTime('format: H:i'));
             
