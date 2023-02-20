@@ -1,5 +1,5 @@
 
-
+// Function to display modal window in the Home page
 const elements = [
     { eventType: 'click', element: document.querySelector('.show-modalcust') },
     { eventType: 'click', element: document.querySelector('.close-modalcust') },
@@ -19,9 +19,7 @@ elements.forEach(({ eventType, element }) => {
     });
 });
 
-
-
-
+// Function to allow the user to scroll up to the top of the page
 function addButtonScrollBehavior(buttonId) {
     const mybutton = document.getElementById(buttonId);
 
@@ -41,10 +39,7 @@ function addButtonScrollBehavior(buttonId) {
 addButtonScrollBehavior("ScrollBtn");
 
 
-
-
 // Function to display the error message linked to the booking hour control = in progress
-
 /*function onClickBtnLike(event) {
     event.preventDefault();
 
@@ -62,7 +57,6 @@ document.querySelectorAll('js-booking').forEach(function (link) {
 
 
 //Function to add some filters to dishes page = in progress
-
 /*const FiltersForm = document.querySelector('#filters');
 
 document.querySelectorAll('#filters input').forEach(function (input) {
