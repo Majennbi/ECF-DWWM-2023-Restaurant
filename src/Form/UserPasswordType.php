@@ -16,6 +16,7 @@ class UserPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
         ->add('plainPassword', RepeatedType::class, [
             'type' => PasswordType::class,
             'invalid_message' => 'Les mots de passe doivent correspondre',
@@ -53,8 +54,8 @@ class UserPasswordType extends AbstractType
                     ]),
                 ],
             ],
-        ]
-        )
+        ])
+
             ->add('newPassword', PasswordType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -74,9 +75,10 @@ class UserPasswordType extends AbstractType
                     ]),
                 ],
             ])
+            
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary mt-4',
+                    'class' => 'btn btn-form-page mt-4',
                 ],
                 'label' => 'Changer mot de passe',
             ]);

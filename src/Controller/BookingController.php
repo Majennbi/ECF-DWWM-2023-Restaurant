@@ -22,7 +22,6 @@ class BookingController extends AbstractController
     #[Route('/booking', name: 'booking.index', methods: ['GET', 'POST'])]
     public function index(BookingRepository $repository, Request $request, EntityManagerInterface $manager): Response
     {
-
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
 
@@ -31,7 +30,6 @@ class BookingController extends AbstractController
         $openingHours = $manager->getRepository(OpeningHours::class)->findOneBy(['id' => '40']); //Prod :'3']);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $booking = $form->getData();
             $booking->setOpeningHours($openingHours);
 
@@ -40,8 +38,6 @@ class BookingController extends AbstractController
             $startHour = $openingHours->getStartHour();
             $endHour = $openingHours->getEndHour();
 
-
-
             if ($bookingHour < $startHour || $bookingHour > $endHour) {
                 // Add an error to the form
                 $form->addError(new \Symfony\Component\Form\FormError(sprintf('La réservation doit 
@@ -49,12 +45,11 @@ class BookingController extends AbstractController
 
                 /*return new JsonResponse([
                     'message' => 'La réservation doit être comprise entre ' . $startHour->format('H\hi') . ' et ' . $endHour->format('H\hi'),
-                ], Response::HTTP_BAD_REQUEST);*/
+                ], Response::HTTP_BAD_REQUEST);*/ // For AJAX request, feature for later
+                
             } else {
                 $manager->persist($booking);
                 $manager->flush();
-
-
 
                 $this->addFlash('success', 'Votre réservation a bien été prise en compte!');
 

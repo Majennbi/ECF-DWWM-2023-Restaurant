@@ -15,58 +15,50 @@
 
 		<h2 class="lead home-subtitle">La promesse d'un voyage savoyard</h2>
 		<a class="btn btn-booking" href="{{ path ('booking.index') }}">Réserver</a>
-
-
 	</section>
 
 	<section class="presentation-container">
 		<h2 class="h2-title">Des plats gastronomiques, sans artifices</h2>
 		<div class="home-presentation">
 			<div class="presentation-text">
-				<p>Le restaurant Le Quai Antique vous propose une cuisine traditionnelle et savoyarde, élaborée 
-																																																																																																																								    à partir de produits frais et de saison. Le chef vous propose une carte variée et raffinée, qui 
-																																																																																																																								    vous fera découvrir les saveurs de la région
+				<p>En cuisine ou en salle, notre personnel partagent la même passion pour la gastronomie.
+					Notre équipe est à votre écoute pour vous offrir une expérience culinaire unique.
 				</p>
-
 			</div>
 		</div>
 
 		<div class="btn-dishes-wrapper">
-			<a class="btn btn-dishes" href={{ path ('dish.index') }} type="button">Consulter la carte</a>
-
-
+		<p class="btn-dishes-wrapper-text">Le restaurant Le Quai Antique vous propose une cuisine traditionnelle et savoyarde, élaborée 
+		à partir de produits frais et de saison. Le chef vous propose une carte variée et raffinée, qui 
+		vous fera découvrir les saveurs de la région</p>
 			<section class="modalcust-wrapper">
-				<button class="btn show-modalcust">Horaires d'ouverture</button>
+				<button class="btn show-modalcust">Le message du chef</button>
 				<div class="modalcust">
-					<h2>Nos horaires d'ouverture</h2>
-					<ul>
-						<li>Lundi : 12h-14h</li>
-						<li>Mardi : 12h-14h</li>
-						<li>Mercredi : 12h-14h/li></li>
-						<li>Jeudi : 12h-14h</li>
-						<li>Vendredi : 12h-14h</li>
-						<li>Samedi : 12h-14h</li>
-						<li>Dimanche : 12h-14h</li>
-					</ul>
+					<h3 class="h3-title">Mes chers convives</h3>
+					<p>Je vous souhaite la bienvenue au restaurant Le Quai Antique. 
+						Je suis heureux de vous accueillir dans mon établissement et de vous faire découvrir 
+						ma cuisine. Je vous propose une cuisine traditionnelle et savoyarde, élaborée à 
+						partir de produits frais et de saison. Aussi, toute critique sera la bienvenue, donc n'hésitez pas
+						à passer me voir en cuisine</p>
 
-					<button class="close-modalcust">Close</button>
+				<button class="close-modalcust">Fermer</button>
 				</div>
 			</section>
-			<div class="modalcust-bg"></div>
+		<div class="modalcust-bg"></div>
+		<a class="btn btn-dishes" href={{ path ('dish.index') }} type="button">Consulter la carte <i class="fa fa-utensils"></i></a>
 		</div>
-
 
 		<div class="home-presentation2">
 			<div class="presentation-text">
 				<p>
 					Nos plats sont cuisinés pour vous offrir un moment de plaisir et de convivialité.
-																																																																																																																								    Nous vous accueillons dans un cadre authentique et raffiné, pour vous faire découvrir ou redécouvrir
-																																																																																																																								    la cuisine savoyarde.
+			 		Nous vous accueillons dans un cadre authentique et raffiné, pour vous faire découvrir ou redécouvrir
+					la cuisine savoyarde.
 				</p>
 			</div>
 		</div>
-
 	</section>
-
-
+	<button onclick="topFunction()" id="ScrollBtn" title="go to top">
+	<i class="fa fa-chevron-up"></i>
+	</button>
 {% endblock %}

@@ -17,6 +17,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        
         ->add('fullName', TextType::class, [
             'attr' => [
                 'class' => 'form-control',
@@ -58,7 +59,7 @@ class UserType extends AbstractType
 
         ->add('submit', SubmitType::class, [
             'attr' => [
-                'class' => 'btn btn-primary mt-4',
+                'class' => 'btn btn-form-page mt-4',
             ],
             'label' => 'Modifier',
         ]);

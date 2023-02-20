@@ -25,15 +25,13 @@ class CreateAdministratorCommand extends Command
     {
         $this->entityManager = $entityManager;
         parent::__construct('app:create-administrator');
-
     }
     protected function configure(): void
     {
         $this
             ->addArgument('full_name', InputArgument::OPTIONAL, 'Full Name')
             ->addArgument('email', InputArgument::OPTIONAL, 'Email')
-            ->addArgument('password', InputArgument::OPTIONAL, 'Password');
-            
+            ->addArgument('password', InputArgument::OPTIONAL, 'Password');    
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

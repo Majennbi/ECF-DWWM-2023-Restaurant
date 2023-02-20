@@ -27,14 +27,11 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Le Quai Antique - Administration')
             ->renderContentMaximized();
-
     }
 
     public function configureMenuItems(): iterable
     {
-       
         yield MenuItem::linkToUrl('Retour vers le site', 'fas fa-circle-left' ,'/');
-
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Plats de la carte', 'fas fa-utensils', Dish::class);

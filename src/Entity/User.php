@@ -38,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+
     #[ORM\Column]
     #[Assert\NotBlank()]
     private ?string $password = 'password';
@@ -49,9 +50,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $updatedAt;
-
-    /*#[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $updatedAt = null;*/
 
     #[ORM\PreUpdate]
 
@@ -95,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @see UserInterface
      */
+
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -103,6 +102,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
+
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -137,6 +137,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
+
     public function getPassword(): string
     {
         return $this->password;
@@ -152,6 +153,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
+    
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here

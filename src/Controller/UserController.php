@@ -14,7 +14,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-
     /**
      * This controller show a form to edit a user
      * 
@@ -28,7 +27,6 @@ class UserController extends AbstractController
     public function edit(User $user, Request $request, EntityManagerInterface $manager, 
     UserPasswordHasherInterface $hasher): Response
     {
-
         if (!$this->getUser()) { 
             return $this->redirectToRoute('security.login');
         }
@@ -42,18 +40,17 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if($hasher->isPasswordValid($user, $form->getData()->getPlainPassword())) {
-           $user= $form->getData();
-           $manager->persist($user);
+            $user= $form->getData();
+            $manager->persist($user);
             $manager->flush();
 
             $this->addFlash('success', 'Votre profil a bien été modifié !');
 
             return $this->redirectToRoute('home.index');
-        } else {
+            } else {
             $this->addFlash('warning', 'Le mot de passe est incorrect !');
+            }
         }
-    }
-
         return $this->render('pages/user/edit.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -72,7 +69,6 @@ class UserController extends AbstractController
     public function editPassword(User $user, Request $request, EntityManagerInterface $manager,
     UserPasswordHasherInterface $hasher): Response 
     {
-
         if (!$this->getUser()) { 
             return $this->redirectToRoute('security.login');
         }
@@ -86,7 +82,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
-
                 $user->setUpdatedAt(new \DateTimeImmutable());
                 $user->setPlainPassword($form->getData()['newPassword']);
  
@@ -95,13 +90,11 @@ class UserController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
      
-                 
-     
-                 return $this->redirectToRoute('home.index');
-             } else {
+                return $this->redirectToRoute('home.index');
+            } else {
                  $this->addFlash('warning', 'Le mot de passe est incorrect !'); 
-             }
             }
+        }
         return $this->render('pages/user/edit_password.html.twig',[
             'form' => $form->createView()
         ]);

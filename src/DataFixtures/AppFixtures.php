@@ -21,17 +21,15 @@ class AppFixtures extends Fixture
          */
         private Generator $faker;
 
-
         public function __construct()
         {
             $this->faker = Factory::create('fr_FR');
         }
-        // $product = new Product();
-        // $manager->persist($product);
+       
         public function load(ObjectManager $manager): void
         {
         
-        /*Deal
+        /*Deal // The deal functionality is not yet implemented
         for ($i=1; $i<=50; $i++) {
             $deal = new Deal();
             $deal->setTitle($this->faker->word());
@@ -51,9 +49,7 @@ class AppFixtures extends Fixture
             /* * The image functionality is not yet implemented
             $dish->setImage($this->faker->imageUrl(250, 250));*/
 
-
             $manager->persist($dish);
-            
         }
 
         //Users
@@ -76,8 +72,8 @@ class AppFixtures extends Fixture
             $user->setPassword($this->faker->password());
             $user->setRoles(['ROLE_USER']);
             $user->setPlainPassword('password');
-            
             $users[] = $user;
+            
             $manager->persist($user);
         }
      
@@ -103,8 +99,6 @@ class AppFixtures extends Fixture
             $booking->setBookingHour($this->faker->dateTime('format: H:i'));
             $booking->setOpeningHours($OpeningHours);
            
-           
-            
             $manager->persist($booking); 
         }
      

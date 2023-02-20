@@ -33,8 +33,6 @@ class DishController extends AbstractController
 
         return $this->render('pages/dish/index.html.twig', [
             'dishes' => $repository->findAll(), //[] *Test message si données non récupérées*
-
-
         ]);
     }
 }

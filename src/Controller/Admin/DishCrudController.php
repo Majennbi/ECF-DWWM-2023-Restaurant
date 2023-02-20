@@ -55,5 +55,4 @@ class DishCrudController extends AbstractCrudController
                 ->hideOnIndex(),
         ];
     }
-    
 }

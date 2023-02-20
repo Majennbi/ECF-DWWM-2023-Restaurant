@@ -1,24 +1,46 @@
 
 
-const showModal = document.querySelector(".show-modalcust"),
-    closeModal = document.querySelector(".close-modalcust"),
-    modalContainer = document.querySelector(".modalcust-wrapper"),
-    modalBg = document.querySelector(".modalcust-bg");
+const elements = [
+    { eventType: 'click', element: document.querySelector('.show-modalcust') },
+    { eventType: 'click', element: document.querySelector('.close-modalcust') },
+    { eventType: 'click', element: document.querySelector('.modalcust-bg') },
+];
+const modalContainer = document.querySelector('.modalcust-wrapper');
+const modalBg = document.querySelector('.modalcust-bg');
 
-showModal.addEventListener("click", function () {
-    modalContainer.classList.add("active");
-    modalBg.classList.add("active");
+function toggleModal(container, bg) {
+    container.classList.toggle('active');
+    bg.classList.toggle('active');
+}
+
+elements.forEach(({ eventType, element }) => {
+    element.addEventListener(eventType, () => {
+        toggleModal(modalContainer, modalBg);
+    });
 });
 
-closeModal.addEventListener("click", function () {
-    modalContainer.classList.remove("active");
-    modalBg.classList.remove("active");
-});
 
-modalBg.addEventListener("click", function () {
-    modalContainer.classList.remove("active");
-    modalBg.classList.remove("active");
-});
+
+
+function addButtonScrollBehavior(buttonId) {
+    const mybutton = document.getElementById(buttonId);
+
+    window.onscroll = function () {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    };
+
+    mybutton.addEventListener("click", function () {
+        document.documentElement.scrollTop = 0;
+    });
+}
+
+addButtonScrollBehavior("ScrollBtn");
+
+
 
 
 // Function to display the error message linked to the booking hour control = in progress

@@ -19,6 +19,7 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
             ->add('fullName', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -37,6 +38,7 @@ class RegistrationType extends AbstractType
                     ]),
                 ],
             ])
+
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -56,6 +58,7 @@ class RegistrationType extends AbstractType
                     ]),
                 ],
             ])
+
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe doivent correspondre',
@@ -93,11 +96,11 @@ class RegistrationType extends AbstractType
                         ]),
                     ],
                 ],
-            ]
-            )
+            ])
+            
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-registration-page mt-4',
+                    'class' => 'btn btn-form-page mt-4',
                 ],
                 'label' => 'S\'inscrire',
             ]);

@@ -41,6 +41,5 @@ class UserCrudController extends AbstractCrudController
             DateTimeField::new('createdAt', 'Créé le')
                 ->setFormTypeOption('disabled', 'disabled')
         ];
-    }
-     
+    }  
 }

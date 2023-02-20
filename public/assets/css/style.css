@@ -14,29 +14,61 @@ body {
  
 }
 
+
+#ScrollBtn {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Fixed/sticky position */
+    bottom: 20px;
+    /* Place the button at the bottom of the page */
+    right: 10px;
+    /* Place the button 30px from the right */
+    z-index: 99;
+    /* Make sure it does not overlap */
+    border: none;
+    /* Remove borders */
+    outline: none;
+    /* Remove outline */
+    background-color: rgba(33, 47, 68, 0.65);
+    /* Set a background color */
+    color: white;
+    /* Text color */
+    cursor: pointer;
+    /* Add a mouse pointer on hover */
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    /* Rounded corners */
+    font-size: 18px;
+    /* Increase font size */
+}
+
+#ScrollBtn:hover {
+    background-color: #555;
+    /* Add a dark-grey background on hover */
+}
+
+
 .modalcust-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-
-   
 }
 
 .show-modalcust {
-    font-size: 1.2rem;
-    background-color: #212F44;
-    color: #F7F7F2;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #6C7484;
     border-radius: 15px;
     justify-self: center;
     align-self: center;
-    margin-bottom: 30px;
     cursor: pointer;
+    margin-top: 1rem;
+    
 }
 
 .show-modalcust:hover {
-    background-color: #DABB95;
-    color: #F7F7F2;
-    border: 1px solid #F7F7F2;
+    color: #212F44;
 }
 
 .modalcust {
@@ -55,7 +87,9 @@ body {
     transition: all 0.3s ease;
     z-index: 11;
     font-size: 1.5rem;
-    
+    font-weight: 400;
+    width: 80%;
+    margin-right: 1rem; 
 }
 
 .modalcust > h2 {
@@ -68,8 +102,8 @@ body {
 .close-modalcust {
     padding: 5px 15px;
     border: none;
-    color: #000;
-    background-color: #F7F7F2;
+    color: #F7F7F2;
+    background-color: #6C7484;
     border-radius: 15px;
     cursor: pointer;
 }
@@ -122,12 +156,41 @@ body {
 }
 
 .navbar-nav > li > a {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #F7F7F2;
     
 }
 
-.btn-login{
+.dropdown-menu.show {
+    background-color: #212F44;
+    font-size: 1.2rem;
+}
+
+.dropdown-item {
+    color: #F7F7F2;
+}
+
+.dropdown-item:hover {
+    background-color: #DABB95;
+    color: #212F44;
+}
+
+.dropdown-item > i {
+    color: #F7F7F2;
+    padding-right: 0.3rem;
+}
+
+.dropdown-item > i:hover {
+    color: #212F44;
+}
+
+.dropdown-menu {
+    border-top: 1px solid #F7F7F2;
+    border-bottom: 1px solid #F7F7F2;
+}
+
+
+.btn-login {
     background-color: #BC7415;
     color: #F7F7F2;
     border: 1px solid transparent;
@@ -147,7 +210,7 @@ body {
 
 .btn-login, .btn-signin, .btn-footer{
     border-radius: 15px;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     padding: 0.5rem 1.5rem; 
     margin-bottom: 1rem;
 }
@@ -167,6 +230,19 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.form-error {
+    color : #BC7415;
+    list-style-type: none;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+}
+
+.form-error > ul {
+    list-style: none;
+    padding: 0;
 }
 
 @media screen and (min-width: 992px){
@@ -191,6 +267,12 @@ body {
     .registration-btn {
         margin: 0;  
 }
+
+.dropdown-menu.show {
+    background-color: #212F44;
+    font-size: 1.2rem;
+    width: 100%;
+}
 }
 
 
@@ -212,6 +294,8 @@ body {
     height: 100vh;
     width: 100vw;
     color: #F7F7F2;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 .home-title {
@@ -254,23 +338,26 @@ body {
 .home-presentation, .home-presentation2 {
     background-repeat: no-repeat;
     background-size: cover;
-    min-width: 60vw;
+    width: 90vw;
+    max-width: 1200px;
     min-height: 60vh;
-    max-width: 70vw;
-  
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 50px;
     border-radius: 15px;
-    box-shadow: 15px 15px #DABB95;
+  
 }
 .home-presentation {
-    background-image: url(../images/home-presentation.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.45)),
+    url(../images/home-presentation.jpg);
 }
 .home-presentation2
  {
-    background-image: url(../images/home-presentation2.jpg);
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.45)),url(../images/home-presentation2.jpg);
 }
 
 
@@ -285,6 +372,16 @@ body {
    
 }
 
+.h3-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #F7F7F2;
+    font-family: 'Lora', serif;
+    margin: 1rem;
+    text-transform: uppercase;
+}
+
 .h2-title::first-letter {
     color: #212F44;
     font-size: 4rem;
@@ -293,19 +390,19 @@ body {
 }
 
 .presentation-text {
-    background: linear-gradient( rgba(33, 47, 68, 0.8), rgba(33, 47, 68, 0.8));
+    background: linear-gradient( rgba(33, 47, 68, 0.85), rgba(33, 47, 68, 0.85));
     border : 1px solid #DABB95;
     margin: 40px;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
     color: #F7F7F2;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 400;
     border-radius: 15px;
-    padding: 2rem;
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    text-align: center;
+    font-family: 'Hind Madurai', sans-serif;
 }
 
 .btn-dishes {
@@ -315,8 +412,8 @@ body {
     border-radius: 15px;
     justify-self: center;
     align-self: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 2rem;
+    border: 1px solid transparent;
 }
 
 .btn-dishes:hover {
@@ -325,33 +422,49 @@ body {
     border: 1px solid #6C7484;
 }
 
+.btn-dishes > .fa {
+    padding-left: 0.3rem;
+}
+
 .presentation-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin: 2rem 3rem 4rem 3rem;
 }
 
 .btn-dishes-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #DABB95;
+    padding: 3rem 10vw 3rem 10vw;
+    width: 100vw;
 
+
+}
+
+.btn-dishes-wrapper-text {
+    font-family: 'Hind Madurai', sans-serif;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #212F44;
+    
 }
 
 @media screen and (min-width: 992px)
 {
 .btn-dishes-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: #DABB95;
-    width: 100%;
-    height: 20vh;
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
+
+
 
 .h2-title {
     font-size: 3rem;
@@ -362,6 +475,14 @@ body {
     font-size: 4.5rem;
 
 }
+
+.home-presentation, .home-presentation2 {
+    box-shadow: 15px 15px #DABB95;
+}
+
+.presentation-text {
+    font-size: 1.5rem;
+}
 }
 
 /*DISHES*/
@@ -371,7 +492,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 2rem;
+    margin: 2rem 3rem;
 }
 
 .dishes-container > p {
@@ -487,8 +608,7 @@ body {
     flex-direction: column;
     justify-content: center;
     margin-right: 5rem;
-    margin-left: 5rem;
-    margin-bottom: 5rem;
+    margin: 2rem 5rem 5rem 5rem;
 }
 
 .form-control {
@@ -531,7 +651,7 @@ body {
     
 }
 
-.btn-booking-page, .btn-registration-page, .btn-login-page {
+.btn-form-page {
     background-color: #6C7484;
     color: #F7F7F2;
     border: 1px solid transparent;
@@ -542,7 +662,7 @@ body {
     font-size: 1rem;
 }
 
-.btn-booking-page:hover, .btn-registration-page:hover, .btn-login-page:hover {
+.btn-form-page:hover {
     background-color: #212F44;
     color: #F7F7F2;
 }
@@ -570,7 +690,7 @@ body {
     background-color: #212F44;
     color: #F7F7F2;
     padding-top: 4rem;
-    padding-bottom: 2rem;
+    padding: 2rem 3rem 1rem 3rem;
 }
 
 .footer, .desktopfooter {
@@ -667,9 +787,11 @@ body {
 
 .footer-links {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 1rem;
     justify-content: center;
     margin: 2rem;
+    align-items: center;
 }
 
 .footer-links > a {
@@ -733,3 +855,4 @@ body {
         justify-self: center;
     }
 }
+

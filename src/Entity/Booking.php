@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
-
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
 {
@@ -34,44 +33,22 @@ class Booking
 
     #[ORM\Column(type: 'date_immutable')]
     #[Assert\NotNull()]
+    #[Assert\GreaterThanOrEqual('today', message: 'Vous devez choisir une date à partir d\'aujourd\'hui ({{ compared_value }}) .')]
     private ?\DateTimeImmutable $bookingDate;
     
-   #[ORM\Column(type: Types::TIME_MUTABLE,)]
+    #[ORM\Column(type: Types::TIME_MUTABLE,)]
     private ?\DateTime $bookingHour = null;
 
     #[ORM\ManyToOne(targetEntity: OpeningHours::class, inversedBy: 'booking', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
-    
     
     private $openingHours;
   
      public function __construct()
     {
         $this->bookingDate = new \DateTimeImmutable();
-        $this->bookingHour = new \DateTime()
-        
-       ;
+        $this->bookingHour = new \DateTime();
     }
-
-    /*public function validateBookingHourIsBetweenOpeningHours(ExecutionContextInterface $context): void
-    {
-        echo 'Validation is running';
-        $openingHours = $this->getOpeningHours();
-        $bookingHour = $this->getBookingHour();
-    
-        if (!$openingHours || !$bookingHour) {
-            return;
-        }
-    
-        $startHour = $openingHours->getStartHour();
-        $endHour = $openingHours->getEndHour();
-        if ($bookingHour < $startHour || $bookingHour >= $endHour) {
-            $context->buildViolation('The booking hour must be between the opening hours.')
-                ->setParameter('{{ start_hour }}', $startHour->format('Y-m-d H:i:s'))
-                ->setParameter('{{ end_hour }}', $endHour->format('Y-m-d H:i:s'))
-                ->addViolation();
-        }
-    }*/
 
     public function getId(): ?int
     {
@@ -126,7 +103,6 @@ class Booking
         return $this;
     }
     
-
     public function getOpeningHours(): ?OpeningHours
     {
         return $this->openingHours;

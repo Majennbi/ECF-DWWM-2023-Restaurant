@@ -68,6 +68,7 @@ class OpeningHours
      /**
      * @return Collection|Booking[]
      */
+
     public function getBooking(): Collection
     {
         return $this->booking;
@@ -93,7 +94,5 @@ class OpeningHours
         }
 
         return $this;
-    }
-
-    
+    } 
 }

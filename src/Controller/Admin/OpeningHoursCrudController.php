@@ -24,8 +24,7 @@ class OpeningHoursCrudController extends AbstractCrudController
 
             ->setPageTitle('index', 'Le Quai Antique - %entity_label_plural%')
 
-            ->setPaginatorPageSize(10);
-            
+            ->setPaginatorPageSize(10); 
     }      
     
     public function configureFields(string $pageName): iterable

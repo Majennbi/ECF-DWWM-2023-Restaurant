@@ -5,7 +5,6 @@ namespace App\EntityListener;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-
 class UserListener
 {
     private UserPasswordHasherInterface $hasher;
@@ -30,6 +29,7 @@ class UserListener
      * @param User $user 
      * @return void
      */
+
     public function encodePassword(User $user): void
     {
         if ($user->getPlainPassword() === null) {
@@ -41,6 +41,5 @@ class UserListener
             $user, 
             $user->getPlainPassword())
         );
-
     }
 }

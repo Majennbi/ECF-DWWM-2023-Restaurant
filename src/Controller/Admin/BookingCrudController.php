@@ -37,9 +37,7 @@ class BookingCrudController extends AbstractCrudController
             TextField::new('bookingName', 'Nom de la réservation'),
             NumberField::new('guestsNumber', 'Nombre de couverts'),
             DateTimeField::new('bookingDate', 'Date de la réservation'),
-            DateTimeField::new('bookingHour', 'Heure de la réservation'),
-         
-                
+            DateTimeField::new('bookingHour', 'Heure de la réservation'),      
         ];
     }
     
